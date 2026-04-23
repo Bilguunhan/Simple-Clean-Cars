@@ -15,24 +15,3 @@ function reveal() {
 
 window.addEventListener("scroll", reveal);
 reveal();
-
-const video = document.getElementById("hero-video");
-const startTime = 5;
-const endTime = 46;
-
-if (video) {
-  video.addEventListener("loadedmetadata", () => {
-    video.currentTime = startTime;
-
-    video.play().catch(err => {
-      console.log("Video nejde přehrát:", err);
-    });
-  });
-
-  video.addEventListener("timeupdate", () => {
-    if (video.currentTime >= endTime) {
-      video.currentTime = startTime;
-      video.play();
-    }
-  });
-}
