@@ -1,11 +1,11 @@
 const reveals = document.querySelectorAll(".reveal");
 
-function reveal(){
-  reveals.forEach(el=>{
+function reveal() {
+  reveals.forEach(el => {
     const top = el.getBoundingClientRect().top;
     const height = window.innerHeight;
 
-    if(top < height - 80){
+    if (top < height - 80) {
       el.classList.add("active");
     } else {
       el.classList.remove("active");
@@ -16,18 +16,26 @@ function reveal(){
 window.addEventListener("scroll", reveal);
 reveal();
 
-
-const video = document.querySelector("video");
+const video = document.getElementById("hero-video");
 
 const startTime = 5;
-const endTime = 46;  
+const endTime = 46;
 
-video.addEventListener("loadedmetadata", () => {
-  video.currentTime = startTime;
-});
+if (video) {
 
-video.addEventListener("timeupdate", () => {
-  if (video.currentTime >= endTime) {
-    video.currentTime = startTime;
-  }
-});
+  // načtení uloženého času
+  video.addEventListener("loadedmetadata", () => {
+    const savedTime = localStorage.getItem("videoTime");
+    video.currentTime = savedTime ? savedTime : startTime;
+  });
+
+  // ukládání času
+  video.addEventListener("timeupdate", () => {
+    localStorage.setItem("videoTime", video.currentTime);
+
+    if (video.currentTime >= endTime) {
+      video.currentTime = startTime;
+    }
+  });
+
+}
