@@ -108,3 +108,16 @@ header h1{
   z-index:2;
   color:white;
 }
+
+.video-bg{
+  position:absolute;
+  inset:0;
+  z-index:0;
+}
+
+.video-bg video{
+  width:110%;
+  height:110%;
+  object-fit:contain;
+  transform:translate(-5%, -5%);
+}
